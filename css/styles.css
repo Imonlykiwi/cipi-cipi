@@ -52,3 +52,17 @@
     font-size: 22px;
     color: #1d1d1d;
 }
+.input-cursor {
+    height: 40px;
+    width: 2px;
+    background-color: rgb(235, 235, 235);
+    display: inline-block;
+    animation: blink .5s linear infinite alternate;
+    transform: translateY(3px);
+}
+@keyframes blink {
+    0% {opacity: 1;}
+    40% {opacity: 1;}
+    60% {opacity: 0;}
+    100% {opacity: 0;}
+  }

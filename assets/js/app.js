@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   carousel(carouselText, "#feature-text");
 });
 
-async function typeSentence(sentence, eleRef, delay = 50) {
+async function typeSentence(sentence, eleRef, delay = 30) {
   const letters = sentence.split("");
   let i = 0;
   while (i < letters.length) {
@@ -28,7 +28,7 @@ async function deleteSentence(eleRef) {
   const sentence = document.querySelector(eleRef).innerHTML;
   const letters = sentence.split("");
   while (letters.length > 0) {
-    await waitForMs(50);
+    await waitForMs(30);
     letters.pop();
     document.querySelector(eleRef).innerHTML = letters.join("");
   }
@@ -39,9 +39,9 @@ async function carousel(carouselList, eleRef) {
   while (true) {
     updateFontColor(eleRef, carouselList[i].color);
     await typeSentence(carouselList[i].text, eleRef);
-    await waitForMs(500);
+    await waitForMs(350);
     await deleteSentence(eleRef);
-    await waitForMs(300);
+    await waitForMs(200);
     i++;
     if (i >= carouselList.length) {
       i = 0;
