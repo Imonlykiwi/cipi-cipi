@@ -52,6 +52,12 @@
     font-size: 22px;
     color: #1d1d1d;
 }
+.author-p span {
+    display: block;
+}
+.author-p a,  .author-p a:visited {
+    color: white;
+}
 .input-cursor {
     height: 40px;
     width: 2px;
