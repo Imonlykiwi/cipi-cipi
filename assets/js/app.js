@@ -1,3 +1,65 @@
+class TextCarousel {
+  constructor(textList, elementRef) {
+    this.textList = textList;
+    this.elementRef = elementRef;
+    this.clicks = 0;
+
+    // Trigger the carousel when the DOM content is loaded
+    document.addEventListener("DOMContentLoaded", () => {
+      this.startCarousel();
+    });
+
+    // Track the number of clicks and redirect to a YouTube link after 10 clicks
+    document.body.addEventListener('click', () => {
+      this.clicks++;
+      if (this.clicks === 10) {
+        window.location.href = 'https://www.youtube.com/watch?v=QaMySFc-Rec';
+      }
+    });
+  }
+
+  async typeSentence(sentence, delay = 30) {
+    const letters = sentence.split("");
+    let i = 0;
+    while (i < letters.length) {
+      await this.waitForMs(delay);
+      document.querySelector(this.elementRef).innerHTML += letters[i];
+      i++;
+    }
+  }
+
+  async deleteSentence() {
+    const sentence = document.querySelector(this.elementRef).innerHTML;
+    const letters = sentence.split("");
+    while (letters.length > 0) {
+      await this.waitForMs(30);
+      letters.pop();
+      document.querySelector(this.elementRef).innerHTML = letters.join("");
+    }
+  }
+
+  async startCarousel() {
+    let i = 0;
+    while (true) {
+      this.updateFontColor(this.textList[i].color);
+      await this.typeSentence(this.textList[i].text);
+      await this.waitForMs(350);
+      await this.deleteSentence();
+      await this.waitForMs(200);
+      i = (i + 1) % this.textList.length; // Use modulo to loop back to the beginning
+    }
+  }
+
+  updateFontColor(color) {
+    document.querySelector(this.elementRef).style.color = color;
+  }
+
+  waitForMs(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+}
+
+// Create an instance of TextCarousel
 const carouselText = [
   { text: "Cipi Cipi", color: "white" },
   { text: "Chapa Chapa", color: "orange" },
@@ -9,57 +71,4 @@ const carouselText = [
   { text: "BOOM BOOM!", color: "yellow" },
 ];
 
-document.addEventListener("DOMContentLoaded", async function () {
-  carousel(carouselText, "#feature-text");
-});
-
-async function typeSentence(sentence, eleRef, delay = 30) {
-  const letters = sentence.split("");
-  let i = 0;
-  while (i < letters.length) {
-    await waitForMs(delay);
-    document.querySelector(eleRef).innerHTML += letters[i];
-    i++;
-  }
-  return;
-}
-
-async function deleteSentence(eleRef) {
-  const sentence = document.querySelector(eleRef).innerHTML;
-  const letters = sentence.split("");
-  while (letters.length > 0) {
-    await waitForMs(30);
-    letters.pop();
-    document.querySelector(eleRef).innerHTML = letters.join("");
-  }
-}
-
-async function carousel(carouselList, eleRef) {
-  var i = 0;
-  while (true) {
-    updateFontColor(eleRef, carouselList[i].color);
-    await typeSentence(carouselList[i].text, eleRef);
-    await waitForMs(350);
-    await deleteSentence(eleRef);
-    await waitForMs(200);
-    i++;
-    if (i >= carouselList.length) {
-      i = 0;
-    }
-  }
-}
-
-function updateFontColor(eleRef, color) {
-  document.querySelector(eleRef).style.color = color;
-}
-
-function waitForMs(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-    let clicks = 0;
-
-    document.body.addEventListener('click', () => {
-        clicks++;
-        if (clicks === 10) window.location.href = 'https://www.youtube.com/watch?v=QaMySFc-Rec';
-    });
+const textCarousel = new TextCarousel(carouselText, "#feature-text");
