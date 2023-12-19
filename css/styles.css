@@ -66,6 +66,12 @@
     animation: blink .5s linear infinite alternate;
     transform: translateY(3px);
 }
+.noselect {
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Standardowe właściwości */
+}
 @keyframes blink {
     0% {opacity: 1;}
     40% {opacity: 1;}
