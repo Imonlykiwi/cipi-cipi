@@ -72,6 +72,13 @@
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Standardowe właściwości */
 }
+.feature-text {
+    display: block;
+}
+.text-cont {
+    padding: 5px;
+    display: inline-block;
+}
 @keyframes blink {
     0% {opacity: 1;}
     40% {opacity: 1;}
