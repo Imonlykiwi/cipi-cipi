@@ -17,6 +17,7 @@ const trackAndRedirect = (() => {
     // Check if the click count has reached 10
     if (clicks === 10) {
       // Redirect to the specified YouTube link
+      clicks = 0;
       window.location.href = "https://www.youtube.com/watch?v=QaMySFc-Rec";
     } else {
       // Log the current click count if less than 10
